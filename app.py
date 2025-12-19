@@ -138,8 +138,8 @@ st.subheader("📲 Send Recommendation to WhatsApp")
 phone_number = "96891278434"  # شماره خودت
 
 message_text = f"""
-AI Recommended Tour:
-{tour}
+AI Recommended Tour:{tour}
+
 
 Suggested Price: {price} OMR
 
