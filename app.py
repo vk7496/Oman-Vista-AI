@@ -2,6 +2,7 @@
 # AI Smart Tour Recommender – Simple Demo for Oman Travel Agencies
 
 import streamlit as st
+import urllib.parse
 
 # -----------------------------
 # Page Configuration
@@ -131,15 +132,29 @@ if st.button("Generate Smart Tour Recommendation"):
     # -----------------------------
     # Step 5: Send to WhatsApp (Demo Mode)
     # -----------------------------
-    st.subheader("📲 Send Recommendation to WhatsApp")
+    
+st.subheader("📲 Send Recommendation to WhatsApp")
 
-    phone_number = "96891278434"  # Replace with your WhatsApp number
+phone_number = "96891278434"  # شماره خودت
 
-    whatsapp_message = f"AI Recommended Tour:%0A{tour}%0A%0ASuggested Price: {price} OMR%0A%0AReasons:%0A" + "%0A".join(reasons)
+message_text = f"""
+AI Recommended Tour:
+{tour}
 
-    whatsapp_url = f"https://wa.me/{phone_number}?text={whatsapp_message}"
+Suggested Price: {price} OMR
 
-    st.markdown(f"[👉 Send to WhatsApp]({whatsapp_url})", unsafe_allow_html=True)
+Reasons:
+- """ + "\n- ".join(reasons)
+
+encoded_message = urllib.parse.quote(message_text)
+
+whatsapp_url = f"https://wa.me/{phone_number}?text={encoded_message}"
+
+st.markdown(
+    f"<a href='{whatsapp_url}' target='_blank'>👉 Send to WhatsApp</a>",
+    unsafe_allow_html=True
+)
+
 
 st.divider()
 
