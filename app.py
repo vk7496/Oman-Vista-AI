@@ -133,7 +133,7 @@ if st.button("Generate Smart Tour Recommendation"):
     # -----------------------------
     st.subheader("📲 Send Recommendation to WhatsApp")
 
-    phone_number = "968XXXXXXXX"  # Replace with your WhatsApp number
+    phone_number = "96891278434"  # Replace with your WhatsApp number
 
     whatsapp_message = f"AI Recommended Tour:%0A{tour}%0A%0ASuggested Price: {price} OMR%0A%0AReasons:%0A" + "%0A".join(reasons)
 
