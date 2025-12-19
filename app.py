@@ -128,6 +128,19 @@ if st.button("Generate Smart Tour Recommendation"):
 
     st.info("This AI approach increases conversion rate and average booking value.")
 
+    # -----------------------------
+    # Step 5: Send to WhatsApp (Demo Mode)
+    # -----------------------------
+    st.subheader("📲 Send Recommendation to WhatsApp")
+
+    phone_number = "968XXXXXXXX"  # Replace with your WhatsApp number
+
+    whatsapp_message = f"AI Recommended Tour:%0A{tour}%0A%0ASuggested Price: {price} OMR%0A%0AReasons:%0A" + "%0A".join(reasons)
+
+    whatsapp_url = f"https://wa.me/{phone_number}?text={whatsapp_message}"
+
+    st.markdown(f"[👉 Send to WhatsApp]({whatsapp_url})", unsafe_allow_html=True)
+
 st.divider()
 
 st.caption("Designed & Developed by Golden Bird LLC – AI Tourism Solutions")
