@@ -1,26 +1,36 @@
 # app.py
-# AI Smart Tour Recommender – Simple Demo for Oman Travel Agencies
+# OmanVista AI – WhatsApp Smart Tour Recommender Demo
+# Designed & Developed by Golden Bird LLC
 
+# =============================
+# Imports (must be at top)
+# =============================
 import streamlit as st
 import urllib.parse
 
-# -----------------------------
+# =============================
 # Page Configuration
-# -----------------------------
+# =============================
 st.set_page_config(
-    page_title="AI Smart Tour Recommender | Oman",
+    page_title="OmanVista AI | Smart Tourism",
     page_icon="🌍",
     layout="centered"
 )
 
-st.title("AI-Powered Tour Recommendation – Oman")
-st.write("This demo shows how Artificial Intelligence can increase sales through personalized tour suggestions.")
+# =============================
+# App Header
+# =============================
+st.title("OmanVista AI – Smart Tour Recommendation")
+st.write(
+    "This demo shows how AI can increase travel agency sales in Oman through "
+    "personalized tour recommendations and smart pricing."
+)
 
 st.divider()
 
-# -----------------------------
+# =============================
 # Step 1: Traveler Input
-# -----------------------------
+# =============================
 st.header("1️⃣ Traveler Information")
 
 nationality = st.selectbox(
@@ -28,7 +38,7 @@ nationality = st.selectbox(
     ["European", "GCC", "Asian", "Other"]
 )
 
-days = st.slider("Trip Duration (days)", 3, 14, 7)
+days = st.slider("Trip Duration (days)", min_value=3, max_value=14, value=7)
 
 budget = st.selectbox(
     "Budget Level",
@@ -42,11 +52,12 @@ interests = st.multiselect(
 
 st.divider()
 
-# -----------------------------
-# Step 2: AI Recommendation Logic (Simple & Explainable)
-# -----------------------------
+# =============================
+# AI Recommendation Logic
+# =============================
 def recommend_tour(nationality, days, budget, interests):
-    # Default values
+    """Simple, explainable AI logic for demo purposes"""
+
     tour_name = "Classic Muscat Experience"
     base_price = 400
     explanation = []
@@ -65,7 +76,7 @@ def recommend_tour(nationality, days, budget, interests):
     # Nationality-based adjustment
     if nationality == "European":
         base_price += 70
-        explanation.append("European travelers prefer longer experiential tours")
+        explanation.append("European travelers prefer experiential tours")
 
     if nationality == "GCC":
         base_price += 120
@@ -84,15 +95,22 @@ def recommend_tour(nationality, days, budget, interests):
         base_price += 100
         explanation.append("Extended trip duration")
 
-    return tour_name, max(base_price, 300), explanation
+    final_price = max(base_price, 300)
 
-# -----------------------------
-# Step 3: Generate Recommendation
-# -----------------------------
+    return tour_name, final_price, explanation
+
+# =============================
+# Step 2: Generate Recommendation
+# =============================
 st.header("2️⃣ AI Recommendation")
 
 if st.button("Generate Smart Tour Recommendation"):
-    tour, price, reasons = recommend_tour(nationality, days, budget, interests)
+    tour, price, reasons = recommend_tour(
+        nationality=nationality,
+        days=days,
+        budget=budget,
+        interests=interests
+    )
 
     st.success("AI Recommendation Generated Successfully")
 
@@ -103,14 +121,14 @@ if st.button("Generate Smart Tour Recommendation"):
     st.write(f"**{price} OMR**")
 
     st.subheader("🧠 Why this recommendation?")
-    for r in reasons:
-        st.write(f"- {r}")
+    for reason in reasons:
+        st.write(f"- {reason}")
 
     st.divider()
 
-    # -----------------------------
-    # Step 4: Business Comparison
-    # -----------------------------
+    # =============================
+    # Business Comparison
+    # =============================
     st.subheader("📊 Business Impact (Example)")
 
     col1, col2 = st.columns(2)
@@ -129,33 +147,36 @@ if st.button("Generate Smart Tour Recommendation"):
 
     st.info("This AI approach increases conversion rate and average booking value.")
 
-    # -----------------------------
-    # Step 5: Send to WhatsApp (Demo Mode)
-    # -----------------------------
-    
-st.subheader("📲 Send Recommendation to WhatsApp")
+    st.divider()
 
-phone_number = "96891278434"  # شماره خودت
+    # =============================
+    # WhatsApp Demo Integration
+    # =============================
+    st.subheader("📲 Send Recommendation to WhatsApp (Demo)")
 
-message_text = f"""
-AI Recommended Tour:{tour}
+    phone_number = "968XXXXXXXX"  # <-- replace with your WhatsApp number
 
+    message_text = f"""
+AI Recommended Tour:
+{tour}
 
 Suggested Price: {price} OMR
 
 Reasons:
 - """ + "\n- ".join(reasons)
 
-encoded_message = urllib.parse.quote(message_text)
+    encoded_message = urllib.parse.quote(message_text)
 
-whatsapp_url = f"https://wa.me/{phone_number}?text={encoded_message}"
+    whatsapp_url = f"https://wa.me/{phone_number}?text={encoded_message}"
 
-st.markdown(
-    f"<a href='{whatsapp_url}' target='_blank'>👉 Send to WhatsApp</a>",
-    unsafe_allow_html=True
-)
-
+    st.markdown(
+        f"<a href='{whatsapp_url}' target='_blank'>👉 Send to WhatsApp</a>",
+        unsafe_allow_html=True
+    )
 
 st.divider()
 
+# =============================
+# Footer
+# =============================
 st.caption("Designed & Developed by Golden Bird LLC – AI Tourism Solutions")
