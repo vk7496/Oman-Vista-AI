@@ -12,7 +12,7 @@ st.set_page_config(
 # -----------------------------------
 # Header
 # -----------------------------------
-st.title("🇴🇲 OmanVista AI")
+st.title(" OmanVista AI")
 st.subheader("AI-Powered Tour Recommendation Demo")
 
 st.markdown(
@@ -130,7 +130,7 @@ if st.button("🔍 Generate AI Recommendation"):
     st.divider()
     st.subheader("📲 WhatsApp Message (Demo)")
 
-    phone_number = "968XXXXXXXX"  # شماره خودت بدون +
+    phone_number = "96891278434"  # شماره خودت بدون +
 
     message_text = (
         f"AI Recommended Tour:\n"
